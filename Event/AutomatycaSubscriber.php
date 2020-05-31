@@ -29,7 +29,7 @@ use Mautic\SmsBundle\Event\SmsEvent;
 
 
 /**
- * Class CampaignSubscriber.
+ * Class AutomatycaSubscriber.
  */
 class AutomatycaSubscriber extends CommonSubscriber
 {

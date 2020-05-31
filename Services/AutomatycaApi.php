@@ -18,17 +18,18 @@ use Mautic\CoreBundle\Helper\PhoneNumberHelper;
 use Mautic\LeadBundle\Entity\Lead;
 use Mautic\PageBundle\Model\TrackableModel;
 use Mautic\PluginBundle\Helper\IntegrationHelper;
-use Mautic\SmsBundle\Api\AbstractSmsApi;
+use Mautic\SmsBundle\Sms\TransportInterface;
+use MauticPlugin\MauticAutomatycaBundle\Api\AbstractSmsApi;
 use Monolog\Logger;
 use Plivo\Exceptions\PlivoRestException;
 use Plivo\RestClient;
 
-class AutomatycaApi extends AbstractSmsApi
+class AutomatycaApi extends AbstractSmsApi implements TransportInterface
 {
     /**
      * @var Client
      */
-    protected $client;
+    //protected $client;
 
     /**
      * @var Logger
@@ -48,7 +49,7 @@ class AutomatycaApi extends AbstractSmsApi
     /**
      * @var Http
      */
-    private $http;
+   // private $http;
 
     /**
      * MessageBirdApi constructor.
@@ -60,12 +61,12 @@ class AutomatycaApi extends AbstractSmsApi
      *
      * @param Http $http
      */
-    public function __construct(TrackableModel $pageTrackableModel, PhoneNumberHelper $phoneNumberHelper, IntegrationHelper $integrationHelper, Logger $logger, Http $http)
+    public function __construct(TrackableModel $pageTrackableModel, PhoneNumberHelper $phoneNumberHelper, IntegrationHelper $integrationHelper, Logger $logger/*, Http $http*/)
     {
         $this->logger = $logger;
         $this->integrationHelper = $integrationHelper;
-        $this->http = $http;
-        $this->client = $http;
+      //  $this->http = $http;
+      //  $this->client = $http;
         parent::__construct($pageTrackableModel);
     }
 
@@ -73,8 +74,9 @@ class AutomatycaApi extends AbstractSmsApi
      * @param Lead $contact
      * @param string $content
      *
-     * @return bool|mixed|string
+     * @return bool
      */
+
     public function sendSms(Lead $contact, $content)
     {
      //   echo 'send sms!';
@@ -123,6 +125,7 @@ class AutomatycaApi extends AbstractSmsApi
             echo $curl_error;
         if (!$result)
             return false;
+        return true;
 
     }
 }

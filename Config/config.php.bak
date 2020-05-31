@@ -13,7 +13,7 @@ return array(
 
     'services' => [
         'events' => [
-            'mautic.automatyca.sms.campaignbundle.subscriber' => [
+            'mautic.exotel.sms.campaignbundle.subscriber' => [
                 'class' => 'MauticPlugin\MauticAutomatycaBundle\EventListener\CampaignSubscriber',
                 'arguments' => [
                     'mautic.helper.integration',
@@ -38,7 +38,7 @@ return array(
                     'mautic.helper.integration',
                 ],
             ],
-            'mautic.automatyca.sms.message_queue.subscriber' => [
+            'mautic.exotel.sms.message_queue.subscriber' => [
                 'class' => \MauticPlugin\MauticAutomatycaBundle\EventListener\MessageQueueSubscriber::class,
                 'arguments' => [
                     'mautic.automatyca.sms.model.sms',
@@ -58,7 +58,7 @@ return array(
                 'arguments' => 'mautic.factory',
                 'alias' => 'automatyca',
             ],
-            'mautic.automatyca.form.type.automatycaconfig' => [
+            'mautic.automatyca.form.type.exotelsmsconfig' => [
                 'class' => 'MauticPlugin\MauticAutomatycaBundle\Form\Type\ConfigType',
                 'alias' => 'automatycasmsconfig',
             ],
@@ -67,7 +67,7 @@ return array(
                 'arguments' => 'router',
                 'alias' => 'automatycasend_list',
             ],
-            'mautic.automatyca.form.type.automatycasms_list' => [
+            'mautic.exotel.form.type.automatycasms_list' => [
                 'class' => 'MauticPlugin\MauticAutomatycaBundle\Form\Type\SmsListType',
                 'alias' => 'automatycasms_list',
             ],
@@ -79,7 +79,7 @@ return array(
                     'doctrine.orm.entity_manager',
                     'mautic.lead.model.lead',
                     'mautic.helper.phone_number',
-                    'mautic.automatyca.sms.model.sms',
+                    'mautic.exotel.sms.model.sms',
                     'mautic.helper.integration',
                 ],
                 'alias' => 'automatyca_helper',
@@ -113,17 +113,7 @@ return array(
                 'alias' => 'automatyca_api',
             ],
         ],
-        'models' => [
-            'mautic.automatyca.sms.model.sms' => [
-                'class' => 'MauticPlugin\MauticAutomatycaBundle\Model\SmsModel',
-                'arguments' => [
-                    'mautic.page.model.trackable',
-                    'mautic.lead.model.lead',
-                    'mautic.channel.model.queue',
-                    'mautic.automatyca.sms.api',
-                ],
-            ],
-        ],
+        'models' => [],
         'integrations' => [
             'mautic.integration.automatyca' => [
                 'class' => \MauticPlugin\MauticAutomatycaBundle\Integration\AutomatycaIntegration::class,
@@ -147,46 +137,11 @@ return array(
         ],
         'public' => [
             'mautic_receive_sms' => [
-                'path' => '/automatyca/receive',
+                'path' => '/exotelsms/receive',
                 'controller' => 'MauticAutomatycaBundle:Api\SmsApi:receive',
-            ],
+            ],],
+        'menu' => [],
+        'parameters' => [
+            //  'link_shortener_url'        => null,
         ],
-        'api' => [
-            'mautic_api_smsesstandard' => [
-                'standard_entity' => true,
-                'name' => 'smses',
-                'path' => '/automatycasmses',
-                'controller' => 'MauticAutomatycaBundle:Api\SmsApi',
-            ],
-        ],
-    ],
-    'menu' => [
-
-
-        'main' => [
-            'items' => [
-                'mautic.sms.smses' => [
-                    'route' => 'mautic_sms_index',
-                    'access' => ['sms:smses:viewown', 'sms:smses:viewother'],
-                    'parent' => 'mautic.core.channels',
-                    'checks' => [
-                        'integration' => [
-                            'Automatyca' => [
-                                'enabled' => true,
-                            ],
-                        ],
-                    ],
-                    'priority' => 70,
-                ],
-            ],
-        ],
-    ],
-    'parameters' => [
-        'sms_enabled' => false,
-        'sms_username' => null,
-        'sms_password' => null,
-        'sms_sending_phone_number' => null,
-        'sms_frequency_number' => null,
-        'sms_frequency_time' => null,
-    ],
 );

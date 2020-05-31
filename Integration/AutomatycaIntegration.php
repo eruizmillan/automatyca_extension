@@ -1,8 +1,8 @@
 <?php
 
 
-/*
- * @copyright   2014 Mautic Contributors. All rights reserved
+/**
+ * @copyright   2020 Mautic Contributors. All rights reserved
  * @author      Fernando Rivas
  *
  * @link        http://mautic.org
@@ -21,6 +21,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  */
 class AutomatycaIntegration extends AbstractIntegration
 {
+    protected $coreIntegration = true;
     /**
      * {@inheritdoc}
      *
@@ -56,19 +57,6 @@ class AutomatycaIntegration extends AbstractIntegration
     }
 
     /**
-     * @param \Mautic\PluginBundle\Integration\Form|FormBuilder $builder
-     * @param array                                             $data
-     * @param string                                            $formArea
-     */
-    public function appendToForm(&$builder, $data, $formArea)
-    {
-        if ($formArea == 'keys') {
-
-
-        }
-    }
-
-    /**
      * @return array
      */
     public function getFormSettings()
@@ -87,6 +75,21 @@ class AutomatycaIntegration extends AbstractIntegration
     public function getAuthenticationType()
     {
         return 'none';
+    }
+
+    /**
+     * @param \Mautic\PluginBundle\Integration\Form|FormBuilder $builder
+     * @param array                                             $data
+     * @param string                                            $formArea
+     */
+    public function appendToForm(&$builder, $data, $formArea)
+    {
+        if ($formArea == 'features') {
+         //   $builder->add(
+              /*  'sending_phone_number',*/
+          //   /*   'text'*/);
+
+        }
     }
 }
 
