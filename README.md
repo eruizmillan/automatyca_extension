@@ -10,3 +10,5 @@ This plugin allows to send SMS messages through the Automatyca service provider 
 4. The Automatyca plugin should appear with the rest of the plugins. If it doesn't happen, delete the cache and try again.
 5. Click on the plugin to enter your Automatyca user and password, and publish it.
 6. Make sure that the service is selected as default transport in Settings / Text Message Settings.
+
+Observations: Compatible with Mautic 2.16.
