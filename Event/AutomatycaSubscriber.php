@@ -14,7 +14,6 @@ namespace MauticPlugin\MauticAutomatycaBundle\Event;
 
 use Mautic\AssetBundle\Helper\TokenHelper as AssetTokenHelper;
 use Mautic\CoreBundle\Event\TokenReplacementEvent;
-use Mautic\CoreBundle\EventListener\CommonSubscriber;
 use Mautic\CoreBundle\Helper\CoreParametersHelper;
 use Mautic\CoreBundle\Helper\UrlHelper;
 use Mautic\CoreBundle\Model\AuditLogModel;
@@ -26,12 +25,13 @@ use Mautic\PageBundle\Model\TrackableModel;
 use Mautic\SmsBundle\Helper\SmsHelper;
 use Mautic\SmsBundle\SmsEvents;
 use Mautic\SmsBundle\Event\SmsEvent;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 
 /**
  * Class AutomatycaSubscriber.
  */
-class AutomatycaSubscriber extends CommonSubscriber
+class AutomatycaSubscriber implements EventSubscriberInterface
 {
     /**
      * @var AuditLogModel
